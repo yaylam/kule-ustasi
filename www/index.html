@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#1b1f3b">
+<title>Kule Ustası</title>
+<style>
+  html,body{margin:0;height:100%;overflow:hidden;background:#1b1f3b;font-family:-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+  canvas{display:block;position:absolute;inset:0;width:100%;height:100%}
+  .ui{position:absolute;left:0;right:0;pointer-events:none;color:#fff;text-align:center}
+  #score{top:calc(env(safe-area-inset-top) + 28px);font-size:64px;font-weight:800;text-shadow:0 3px 0 rgba(0,0,0,.18)}
+  #combo{top:calc(env(safe-area-inset-top) + 104px);font-size:20px;font-weight:700;opacity:0;transition:opacity .25s}
+  .panel{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    color:#fff;text-align:center;padding:24px;box-sizing:border-box;pointer-events:auto}
+  .hidden{display:none!important}
+  h1{margin:0;font-size:46px;letter-spacing:1px;text-shadow:0 4px 0 rgba(0,0,0,.2)}
+  .sub{opacity:.85;font-size:17px;margin-top:-6px}
+  .best{font-size:18px;opacity:.9}
+  .btn{pointer-events:auto;border:0;border-radius:16px;padding:16px 28px;font-size:20px;font-weight:800;color:#1b1f3b;background:#ffd166;
+    box-shadow:0 5px 0 #c99a2e;min-width:230px;cursor:pointer;font-family:inherit}
+  .btn:active{transform:translateY(3px);box-shadow:0 2px 0 #c99a2e}
+  .btn.alt{background:#fff;box-shadow:0 5px 0 #b9bfd6}
+  .btn.ad{background:#06d6a0;box-shadow:0 5px 0 #049b74}
+  .btn.ad small{display:block;font-size:13px;font-weight:600;opacity:.8}
+  .tap{font-size:18px;opacity:.9;animation:pulse 1.4s infinite}
+  @keyframes pulse{50%{opacity:.35}}
+  .big{font-size:72px;font-weight:800;line-height:1}
+  .new{color:#ffd166;font-weight:800;font-size:20px}
+  .row{display:flex;gap:10px}
+  .icon{pointer-events:auto;background:rgba(255,255,255,.15);border:0;color:#fff;border-radius:12px;width:48px;height:48px;font-size:22px;cursor:pointer}
+  #topbar{position:absolute;top:calc(env(safe-area-inset-top) + 12px);right:12px;pointer-events:auto}
+  #privacy{position:absolute;left:0;right:0;text-align:center;bottom:calc(env(safe-area-inset-bottom) + var(--banner,0px) + 14px);font-size:13px;opacity:.6;color:#fff;text-decoration:underline;pointer-events:auto}
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="score" class="ui hidden">0</div>
+<div id="combo" class="ui"></div>
+
+<div id="topbar"><button id="soundBtn" class="icon" aria-label="Ses">🔊</button></div>
+
+<div id="menu" class="panel" style="justify-content:flex-start;padding-top:calc(env(safe-area-inset-top) + 90px)">
+  <h1 data-t="title">KULE USTASI</h1>
+  <div class="sub" data-t="tagline">Blokları üst üste diz, en yükseğe çık!</div>
+  <div class="best"><span data-t="best">En iyi</span>: <b id="bestMenu">0</b></div>
+  <div class="tap" style="position:absolute;bottom:calc(env(safe-area-inset-bottom) + var(--banner,0px) + 52px)" data-t="tapToStart">Başlamak için dokun</div>
+  <div id="privacy"><a href="privacy.html" data-t="privacy" style="color:#fff">Gizlilik Politikası</a><span id="adPrivWrap" class="hidden"> · <a href="#" id="adPriv" data-t="adPrivacy" style="color:#fff">Reklam tercihleri</a></span></div>
+</div>
+
+<div id="over" class="panel hidden" style="background:rgba(10,12,30,.55)">
+  <div data-t="score" style="font-size:20px;opacity:.85">Skor</div>
+  <div class="big" id="finalScore">0</div>
+  <div id="newBest" class="new hidden" data-t="newBest">YENİ REKOR!</div>
+  <div class="best"><span data-t="best">En iyi</span>: <b id="bestOver">0</b></div>
+  <div style="height:16px"></div>
+  <button id="continueBtn" class="btn ad"><span data-t="continue">▶ Devam Et</span><small data-t="watchAd">Kısa bir video izle</small></button>
+  <button id="againBtn" class="btn" data-t="playAgain">Tekrar Oyna</button>
+  <button id="shareBtn" class="btn alt" data-t="share">Paylaş</button>
+</div>
+
+<script src="ads.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "appId": "com.kuleustasi.app",
+  "appName": "Kule Ustası",
+  "webDir": "www",
+  "android": { "backgroundColor": "#1b1f3b" },
+  "ios": { "backgroundColor": "#1b1f3b", "contentInset": "never" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 0 }
+  }
+}
